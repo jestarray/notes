@@ -29,6 +29,16 @@ for f in ./*.mp4; do echo "file '$f'" >> LIST.txt; done
 ffmpeg -f concat -safe 0 -i LIST.txt -c copy zout.mp4
 ```
 
+## merging new audio over an existing mp4 file(audacity noise reduction patch in)
+```
+ffmpeg -i IN.mp4 -i IN.ogg -c copy -map 0:v:0 -map 1:a:0 OUT.mp4
+```
+
+## cutting out the first pre-padded 10 seconds for noise reduction:
+```
+ffmpeg -ss 00:0:10 -i IN.mp4 -c copy OUT.mp4
+```
+
 ## compressing an mp4 file with ffmpeg
 ### (just shove it in and the defaults mostly work(TM))
 ```
