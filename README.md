@@ -39,6 +39,12 @@ ffmpeg -i IN.mp4 -i IN.ogg -c copy -map 0:v:0 -map 1:a:0 OUT.mp4
 ffmpeg -ss 00:0:10 -i IN.mp4 -c copy OUT.mp4
 ```
 
+## cutting a video passing in duration params:
+(cut from 00:00 to 02:39)
+```
+ffmpeg -ss 00:00:00 -i in.mp4 -to 00:02:39 -c copy -copyts out.mp4
+```
+
 ## compressing an mp4 file with ffmpeg
 ### (just shove it in and the defaults mostly work(TM))
 ```
