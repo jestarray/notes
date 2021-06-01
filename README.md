@@ -51,3 +51,14 @@ ffmpeg -ss 00:00:00 -i in.mp4 -to 00:02:39 -c copy -copyts out.mp4
 ffmpeg -i input.mp4 output.mp4
 ```
 
+## image editing with imagemagick
+
+### mirror in the vertical axis:
+warning! edits the file in place and overwrites
+```
+mogrify -flip *.jpg
+```
+### mirror in the horizontal axis:
+```
+mogrify -flop *.jpg
+```
