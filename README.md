@@ -46,9 +46,11 @@ ffmpeg -ss 00:00:00 -i in.mp4 -to 00:02:39 -c copy -copyts out.mp4
 ```
 
 ## compressing an mp4 file with ffmpeg
-### (just shove it in and the defaults mostly work(TM))
+### (just shove it in and the defaults mostly work(TM)), second option for further compression ala martins
 ```
 ffmpeg -i input.mp4 output.mp4
+
+ffmpeg -i IN.mp4 -c:v libx264 -profile:v high -preset:v slow -crf:v 24 -c:a aac -b:a 128k -movflags +faststart OUT.mp4
 ```
 
 ## image editing with imagemagick
