@@ -1,5 +1,8 @@
 # notes
 common CLI commands that I use
+
+## Gimp distorting layer colors
+Image -> Mode -> RGB
   
 ## Fixing grub dual boot
 1: Boot arch usb and mount root partition to /mnt `arch-chroot /mnt`
