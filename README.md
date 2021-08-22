@@ -5,11 +5,10 @@ common CLI commands that I use
 Image -> Mode -> RGB
   
 ## Fixing grub dual boot
-1: Boot arch usb and mount root partition to /mnt `arch-chroot /mnt`
-
-2: Mount the EFI Partition to `/boot/efi`
-
-3: Reinstall grub `grub-install` and `grub-mkconfig -o /boot/grub/grub.cfg`
+1: Mount root paartition to `/mnt`, e.g `mount /dev/sda3 /mnt`
+2: Chroot into it: `arch-chroot /mnt`
+3: Mount EFI partition: `mount /dev/sda1 /boot/EFI`
+4: Reinstall grub `grub-install` and `grub-mkconfig -o /boot/grub/grub.cfg`
 
 ## Fixing after dd or win32diskimager messes with your flash drive:
 
