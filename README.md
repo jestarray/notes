@@ -4,10 +4,13 @@ common CLI commands that I use
 ## Gimp distorting layer colors
 Image -> Mode -> RGB
   
-## Fixing grub dual boot
+## Fixing grub dual boot when windows messes it up
 1: Mount root paartition to `/mnt`, e.g `mount /dev/sda3 /mnt`
+
 2: Chroot into it: `arch-chroot /mnt`
+
 3: Mount EFI partition: `mount /dev/sda1 /boot/EFI`
+
 4: Reinstall grub `grub-install` and `grub-mkconfig -o /boot/grub/grub.cfg`
 
 ## Fixing after dd or win32diskimager messes with your flash drive:
