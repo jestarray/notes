@@ -58,6 +58,11 @@ ffmpeg -i input.mp4 output.mp4
 ffmpeg -i IN.mp4 -c:v libx264 -profile:v high -preset:v slow -crf:v 24 -c:a aac -b:a 128k -movflags +faststart OUT.mp4
 ```
 
+## creating a video file from an image file using ffmpeg
+```
+ffmpeg -loop 1 -framerate 30 -i image.jpg -c:v libx264 -t 3 -pix_fmt yuv420p image.mp4
+```
+
 ## image editing with imagemagick
 
 ### mirror in the vertical axis:
