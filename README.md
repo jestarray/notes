@@ -59,9 +59,23 @@ ffmpeg -i IN.mp4 -c:v libx264 -profile:v high -preset:v slow -crf:v 24 -c:a aac 
 ```
 
 ## creating a video file from an image file using ffmpeg
+https://stackoverflow.com/questions/24102336/how-can-i-place-a-still-image-before-the-first-frame-of-a-video
 ```
-ffmpeg -loop 1 -framerate 30 -i image.jpg -c:v libx264 -t 3 -pix_fmt yuv420p image.mp4
+//-t controls the seconds
+ffmpeg -loop 1 -framerate 30 -i image.png -c:v libx264 -t 1 -pix_fmt yuv420p image.mp4
 ```
+## to splice in a still image.mp4 file into the front of the video:
+```
+//convert the image.mp4 to an image.ts file
+ffmpeg -i image.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts image.ts
+
+//and the said video also
+ffmpeg -i video.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts video.ts
+
+//finally stick it infront of the video
+ffmpeg -i "concat:image.ts|video.ts" -c copy -bsf:a aac_adtstoasc output.mp4
+```
+
 
 ## image editing with imagemagick
 
