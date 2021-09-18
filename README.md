@@ -58,6 +58,15 @@ ffmpeg -i input.mp4 output.mp4
 ffmpeg -i IN.mp4 -c:v libx264 -profile:v high -preset:v slow -crf:v 24 -c:a aac -b:a 128k -movflags +faststart OUT.mp4
 ```
 
+## another way to overlay the thumbnail to the start of the video(!WARNING! it overwrites the first second with the overlayed image)
+It also  re-encodes but this is the last step my video production process and in the final step, I always run it through ffmpeg to get a nice compressed version anyways
+```
+ffmpeg -i zcleanaudio_merged.mp4 -i 1920.png \
+-filter_complex "[0:v][1:v] overlay=0:0:enable='between(t,0,1)'" \
+-pix_fmt yuv420p -c:a copy \
+FINAL.mp4
+```
+
 ## creating a video file from an image file using ffmpeg
 https://stackoverflow.com/questions/24102336/how-can-i-place-a-still-image-before-the-first-frame-of-a-video
 ```
