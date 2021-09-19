@@ -97,3 +97,9 @@ mogrify -flip *.jpg
 ```
 mogrify -flop *.jpg
 ```
+
+## compressing png files:
+```
+// WARNING! FLAT OUT REPLACES THE PNG FILES
+pngquant --force --skip-if-larger --ext .png *.png
+```
