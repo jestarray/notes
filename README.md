@@ -103,3 +103,15 @@ mogrify -flop *.jpg
 // WARNING! FLAT OUT REPLACES THE PNG FILES
 pngquant --force --skip-if-larger --ext .png *.png
 ```
+
+## blue yeti microphone output fix
+Blue yeti microphones have support for sound output but I generarlly don't want to use it.
+Also install `pavucontrol` as a nice gui for seeing available sound ouput for applications
+```
+// find the analog stereo you want to output to
+pactl list sinks short
+
+// set it as the default where n is the number
+pactl set-default-sink {n}
+
+```
