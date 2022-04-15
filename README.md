@@ -115,3 +115,17 @@ pactl list sinks short
 pactl set-default-sink {n}
 
 ```
+
+## fixing windows antimalware taking all the cpu
+
+https://discord.com/channels/239737791225790464/239737791225790464/964668873309814784
+
+According to lhecker https://github.com/lhecker who works at microsoft:
+
+unfortunately that's not your issue... there's a bug were the Antimalware service gets stuck in a loop trying to compact the following DB if it's corrupted:
+```%ProgramData%\Microsoft\Windows Defender\Scans\mpenginedb.db*```
+
+deleting those files is safe (actually deleting that entire "Windows Defender" directory should be safe - make backups tho)
+but given how it says "0MB/s" I think it's unlikely to be the culprit...
+in either case: if your laptop is part of a corporate network (for instance from a school) it could be your IT department being inexperienced
+there are certain settings you can make that cause extremely expensive and intrusive AV scanning (and they're better left disabled)
