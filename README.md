@@ -98,6 +98,11 @@ mogrify -flip *.jpg
 mogrify -flop *.jpg
 ```
 
+### batch extending an images canvas size(note: use convert if you don't want to overwrite the file):
+```
+mogrify -background transparent -gravity south -extent <WIDTH>x<HEIGHT> *.png
+```
+
 ## compressing png files:
 ```
 // WARNING! FLAT OUT REPLACES THE PNG FILES
