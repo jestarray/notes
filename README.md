@@ -134,3 +134,41 @@ deleting those files is safe (actually deleting that entire "Windows Defender" d
 but given how it says "0MB/s" I think it's unlikely to be the culprit...
 in either case: if your laptop is part of a corporate network (for instance from a school) it could be your IT department being inexperienced
 there are certain settings you can make that cause extremely expensive and intrusive AV scanning (and they're better left disabled)
+
+## Run cli programs with racket:
+```scheme
+#lang racket
+
+(define curr-dir (current-directory))
+
+(define files
+  (filter
+   (lambda (path)
+     (define ext (path-get-extension path))
+     (cond
+       [(boolean? ext) #f]
+       [(bytes=? ext #".pdf") #t]))
+   (directory-list curr-dir)))
+
+(println files)
+
+(define (filename-no-ext p)
+  (define ext (path-get-extension p))
+  (define str (cond [(string? p) p]
+                    [else
+                     (path->string p)]))
+  (cond
+    [(boolean? ext) (path->string p)]
+    [else
+     (substring str 0 (- (string-length str) (bytes-length ext)))]))
+
+(for
+    ([p files])
+  (define file (path->string p))
+  (define full-path (build-path curr-dir p))
+  ; call the cli program you want to run it through
+  ; use whereis on linux to find it
+  (println p)
+  (system* "/usr/bin/pdftoppm" "-png" (path->string full-path) (filename-no-ext file)))
+
+```
