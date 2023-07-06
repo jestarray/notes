@@ -172,3 +172,23 @@ there are certain settings you can make that cause extremely expensive and intru
   (system* "/usr/bin/pdftoppm" "-png" (path->string full-path) (filename-no-ext file)))
 
 ```
+
+## configure static ip on arch during installation:
+https://bbs.archlinux.org/viewtopic.php?id=265008
+
+1 - manually stopped  systemd-networkd.service and systemd-resolved.service services
+
+```
+systemctl stop systemd-networkd.service systemd-resolved.service
+```
+
+2 - removed any auto-associated ip addr / ip routes.
+```
+ip address del 192.168.0.55/24 dev enp0s2
+ip route del 192.168.0.0/24 via 192.168.43.223 dev enp0s2
+```
+
+3 - configured static IP address with dhcpcd:
+```
+dhcpcd -S ip_address=192.168.1.23/24 -S routers=192.168.1.1 -S domain_name_servers=192.168.1.1 -s 192.168.1.23/24 enp0s2
+```
