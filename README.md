@@ -135,19 +135,20 @@ but given how it says "0MB/s" I think it's unlikely to be the culprit...
 in either case: if your laptop is part of a corporate network (for instance from a school) it could be your IT department being inexperienced
 there are certain settings you can make that cause extremely expensive and intrusive AV scanning (and they're better left disabled)
 
-## Run cli programs with racket:
+## Run files over a cli program with racket:
 ```scheme
 #lang racket
 
 (define curr-dir (current-directory))
-
 (define files
   (filter
    (lambda (path)
      (define ext (path-get-extension path))
+     ;(println ext)
      (cond
        [(boolean? ext) #f]
-       [(bytes=? ext #".pdf") #t]))
+       [else
+        (bytes=? ext #".json")]))
    (directory-list curr-dir)))
 
 (println files)
@@ -161,7 +162,7 @@ there are certain settings you can make that cause extremely expensive and intru
     [(boolean? ext) (path->string p)]
     [else
      (substring str 0 (- (string-length str) (bytes-length ext)))]))
-
+#;
 (for
     ([p files])
   (define file (path->string p))
