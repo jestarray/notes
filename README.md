@@ -193,3 +193,13 @@ ip route del 192.168.0.0/24 via 192.168.43.223 dev enp0s2
 ```
 dhcpcd -S ip_address=192.168.1.23/24 -S routers=192.168.1.1 -S domain_name_servers=192.168.1.1 -s 192.168.1.23/24 enp0s2
 ```
+
+## fix archlinux keyring issues
+when simply updating the keyring doesn't work
+```
+killall gpg-agent
+rm -rf /etc/pacman.d/gnupg
+pacman-key --init
+pacman-key --populate archlinux
+pacman -S archlinux-keyring
+```
