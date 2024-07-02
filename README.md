@@ -9,9 +9,11 @@ Image -> Mode -> RGB
 
 2: Chroot into it: `arch-chroot /mnt`
 
-3: Mount EFI partition: `mount /dev/sda1 /boot/EFI`
+3: Mount EFI partition: `mount /dev/sda1 /boot/efi`
 
-4: Reinstall grub `grub-install` and `grub-mkconfig -o /boot/grub/grub.cfg`
+4: Reinstall grub `grub-install`
+
+5: `grub-mkconfig -o /boot/grub/grub.cfg`
 
 ## Fixing after dd or win32diskimager messes with your flash drive:
 
