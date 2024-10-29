@@ -205,3 +205,9 @@ pacman-key --init
 pacman-key --populate archlinux
 pacman -S archlinux-keyring
 ```
+
+## linux equiv software to windows:
+| Windows | Linux |
+| ------- | ----- |
+| WinDirStat | Qdirtat |
+| Everything | Fsearch |
