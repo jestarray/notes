@@ -211,3 +211,55 @@ pacman -S archlinux-keyring
 | ------- | ----- |
 | WinDirStat | Qdirtat |
 | Everything | Fsearch |
+
+## monitor a process and restart it if it crashes
+Systemd unit files is the modern way to go:
+```ini
+#  /etc/systemd/system/myprogram.service
+[Unit]
+Description=My Program Service
+After=network.target
+StartLimitIntervalSec=20
+StartLimitBurst=2
+
+[Service]
+WorkingDirectory=/path/to/working/dir
+ExecStart=/path/to/your/program
+Type=simple
+User=youruser
+Restart=on-failure
+RestartSec=5s
+
+
+[Install]
+WantedBy=multi-user.target
+```
+ExecStart: The command to start your program.
+
+Restart=on-failure: Restarts the service if it crashes or exits abnormally.
+
+RestartSec=5s: Waits 5 seconds before restarting.
+
+User=: Optionally specify which user runs the service.
+
+WantedBy=multi-user.target: Ensures it starts at boot.
+
+After=network.target: Ensures network is up before starting (optional depending on needs).
+
+```
+sudo systemctl daemon-reexec      # Reload systemd configuration
+sudo systemctl enable myprogram.service # enable it to run at startup
+sudo systemctl start myprogram.service # run it now
+systemctl status myprogram.service
+journalctl -u myprogram.service
+```
+
+## How do I write a bash script to restart a process if it dies?
+prefer systemd unit files if possible
+https://stackoverflow.com/questions/696839/how-do-i-write-a-bash-script-to-restart-a-process-if-it-dies
+```bash
+until myserver; do
+    echo "Server 'myserver' crashed with exit code $?.  Respawning.." >&2
+    sleep 1
+done
+```
