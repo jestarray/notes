@@ -263,3 +263,5 @@ until myserver; do
     sleep 1
 done
 ```
+# certbot rene with systemd timers
+https://www.reddit.com/r/archlinux/comments/tpt800/psa_certbot_package_now_contains_a_systemd_timer/
